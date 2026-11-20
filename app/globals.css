@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  /* Marble, jade and inlay stones */
+  --color-marble: #f6f2e8;
+  --color-marble-deep: #ece5d4;
+  --color-niche: #fbf8f1;
+  --color-ink: #23342e;
+  --color-ink-soft: #55645d;
+  --color-jade: #2f5d50;
+  --color-jade-deep: #17352c;
+  --color-gold: #a98338;
+  --color-gold-soft: #d3b97f;
+  --color-carnelian: #a8443a;
+  --color-lapis: #2c4a7c;
+
+  --font-display: var(--font-marcellus), "Times New Roman", serif;
+  --font-body: var(--font-garamond), Georgia, serif;
+  --font-script: var(--font-pinyon), "Snell Roundhand", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background-color: var(--color-jade-deep);
+  background-image: url("/images/lattice.svg");
+  background-size: 56px 56px;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* The invitation itself: one phone-width sheet, centred on larger screens. */
+.sheet {
+  position: relative;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100svh;
+  background-color: var(--color-marble);
+  background-image: url("/images/grain.png");
+  background-size: 220px 220px;
+  box-shadow: 0 0 80px rgb(0 0 0 / 0.35);
+  overflow-x: clip;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-jade);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-gold-soft);
+  color: var(--color-ink);
+}
+
+/* Soft breathing for the fallback monogram while the invitation is closed. */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+.breathe { animation: breathe 3.6s ease-in-out infinite; }
+
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+.nudge { animation: nudge 1.8s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .breathe, .nudge { animation: none; }
+}
